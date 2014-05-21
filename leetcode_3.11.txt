@@ -1,0 +1,18 @@
+/* integer to roman */
+int RToI(string roman) {
+	int radix[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+	string radixs[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+	vector<int> vradix(radix, radix+sizeof(radix)/sizeof(radix[0]));
+	vector<string> vradixs(radixs, radixs+sizeof(radixs)/sizeof(radixs[0]));
+	int i = 0; 
+	int r = 0;
+	while(i < roman.size()) {
+		if(i==roman.size() || find(vradixs.begin(), vradixs.end(), roman.substr(i, 2)) == vradixs.end()) {
+			r += radix[find(vradixs.begin(), vradixs.end(), roman.substr(i, 1))-vradixs.begin()];
+			--i;
+		} else {
+			r += radix[find(vradixs.begin(), vradixs.end(), roman.substr(i, 2))-vradixs.begin()];
+			i-=2;
+		}
+	}
+}

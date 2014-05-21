@@ -1,0 +1,15 @@
+/* integer to roman */
+string iToR(int a) {
+	int radix[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+	string radixs[] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+	string s;
+	for(int i = 0; i < sizeof(radix)/sizeof(radix[0]); ++i) {
+		int n = a/radix[i];
+		a = a%radix[i];
+		while(n>0) {
+			s += radixs[i];
+			--n;
+		}
+	}
+	return s;
+}

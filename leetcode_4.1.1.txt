@@ -1,0 +1,18 @@
+
+void perm_main(vector<int> &vi) {
+	vector<int> path;
+	perm(vi, 0, path, result);
+}
+
+void perm(vector<int> &vi, int start, vector<int> &path, vector<vector<int> > &result) {
+	if(path.size() == vi.size()) {
+		result.push_back(path);
+	}
+	for(int i = start; i < vi.size(); i++) {
+		swap(vi[i], vi[start]);
+		path.push_back(vi[i]);
+		perm(vi, start+1, path, result);
+		path.pop_back();
+		swap(vi[i], vi[start]);
+	}
+}

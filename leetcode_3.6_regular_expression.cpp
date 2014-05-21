@@ -4,8 +4,9 @@
 using namespace std;
 
 
-
+int ccount=0;
 bool isMatch(const char *s, const char *p) {
+	++ccount;
 	if(p[0] == '\0') {
 		return s[0] == '\0';
 	}
@@ -18,7 +19,7 @@ bool isMatch(const char *s, const char *p) {
 	}
 	if(p[1] == '*') {
 		if(p[0] == '.') {
-			return isMatch(s+1, p+2) || isMatch(s, p+2);
+			return isMatch(s+1, p+2) || isMatch(s, p+2) || isMatch(s+1,p);
 		} else if(s[0] == p[0]) {
 			return isMatch(s+1, p);
 		} else {
@@ -36,7 +37,8 @@ bool isMatch(const char *s, const char *p) {
 }
 
 int main() {
-	const char *s = "ab";
-	const char *p = ".ab";
+	const char *s = "abaaaaaaaaaaab";
+	const char *p = ".*b";
 	cout << isMatch(s, p) << endl;
+	cout << ccount << endl;
 }

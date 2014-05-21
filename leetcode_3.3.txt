@@ -1,0 +1,33 @@
+/* string to integer */
+int atoi(string s) {
+	int pos = 0;
+	bool gettingSign = true;
+	bool neg = false;
+	int r = 1;
+	while(pos < s.size()) {
+		if(gettingSign) {
+			if(s[pos] == '-') {
+				neg = true;
+				gettingSign = false;
+			} else if(isdigit(s[pos])) {
+				r = s[pos] - '0';
+				gettingSign = false;
+			}
+		} else {
+			int tmp = r*10 + s[pos] - '0';
+			if(r > 0 && tmp < 0) {
+				if(neg) {
+					return INT_MIN;
+				} else {
+					return INT_MAX;
+				}
+			} 	
+			r = tmp;
+		}
+	}
+	if(neg) {
+		return -r;
+	} else {
+		return r;
+	}
+}
